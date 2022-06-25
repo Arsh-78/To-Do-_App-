@@ -19,14 +19,7 @@ class TaskScreen extends StatelessWidget {
             builder: (context) => SingleChildScrollView(
               padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom),
-              child: AddTaskScreen(
-                updateListCallback: (newTaskTitle) {
-                  /*     setState(() {
-                    tasks.add(Task(name: newTaskTitle));
-                  });*/
-                  Navigator.pop(context);
-                },
-              ),
+              child: AddTaskScreen(),
             ),
           );
         },
@@ -57,7 +50,7 @@ class TaskScreen extends StatelessWidget {
                       fontWeight: FontWeight.w700),
                 ),
                 Text(
-                  '${Provider.of<TasksData>(context).tasks.length} tasks',
+                  '${Provider.of<TasksData>(context).taskCount} tasks',
                   style: TextStyle(color: Colors.white, fontSize: 15.0),
                 ),
               ],

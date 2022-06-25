@@ -11,14 +11,20 @@ class TasksList extends StatelessWidget {
           taskData /*Equivalent to Provider.of<TasksData>(context)*/, child) {
         return ListView.builder(
           itemBuilder: (context, index) {
+            final task = taskData.tasks[index];
             return TaskTile(
-                isChecked: taskData.tasks[index].isDone,
-                taskTitle: taskData.tasks[index].name,
-                checkBoxCallBack: (bool? checkBoxState) {
-                  /*setState(() {
+              isChecked: task.isDone,
+              taskTitle: task.name,
+              checkBoxCallBack: (bool? checkBoxState) {
+                taskData.updateTask(task);
+                /*setState(() {
                   widget.tasks[index].doneToggle();
-                });*/
-                });
+                });Earlier this used to handle the the toogle of check boxes but after provider since most widgets become statless this also handled by provide,and since its a Consumer it will inevitably rebuild on notification*/
+              },
+              longPressCallBack: () {
+                taskData.deleteTask(index);
+              },
+            );
           },
           itemCount: taskData.taskCount,
         );

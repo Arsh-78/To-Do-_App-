@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_app/data/tasks_data.dart';
 
 import '../widgets/task_list.dart';
 import 'add_task_screen.dart';
@@ -17,7 +19,14 @@ class TaskScreen extends StatelessWidget {
             builder: (context) => SingleChildScrollView(
               padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom),
-              child: AddTaskScreen(),
+              child: AddTaskScreen(
+                updateListCallback: (newTaskTitle) {
+                  /*     setState(() {
+                    tasks.add(Task(name: newTaskTitle));
+                  });*/
+                  Navigator.pop(context);
+                },
+              ),
             ),
           );
         },
@@ -48,7 +57,7 @@ class TaskScreen extends StatelessWidget {
                       fontWeight: FontWeight.w700),
                 ),
                 Text(
-                  '12 tasks',
+                  '${Provider.of<TasksData>(context).tasks.length} tasks',
                   style: TextStyle(color: Colors.white, fontSize: 15.0),
                 ),
               ],
